@@ -1,0 +1,19 @@
+{
+  "name": "blogger-backend-apis",
+  "version": "1.0.0",
+  "description": "Backend for blog project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashishchavan27/blogger-backend-apis.git"
+  },
+  "author": "Ashish Chavan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashishchavan27/blogger-backend-apis/issues"
+  },
+  "homepage": "https://github.com/ashishchavan27/blogger-backend-apis#readme"
+}
