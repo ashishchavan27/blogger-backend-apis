@@ -46,18 +46,6 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-var mainRoutes = require("./routes/index");
-var postsRoutes = require("./routes/posts");
-var categoriesRoutes = require("./routes/categories");
-var loginRoutes = require("./routes/login");
-var readRoutes = require("./routes/read");
-var registerRoutes = require("./routes/register");
-var feedRoutes = require("./routes/feed");
-var searchRoutes = require("./routes/search");
-
-// console.log(MONGODB_URI);
-// console.log(process.env.NODE_ENV);
-
 var app = express();
 
 app.locals.moment = require("moment");
@@ -94,31 +82,7 @@ app.use(
   })
 );
 
-// Connect-Flash
-app.use(require("connect-flash")());
-app.use(function (req, res, next) {
-  res.locals.messages = require("express-messages")(req, res);
-  next();
-});
-
-app.use(
-  expressValidator({
-    errorFormatter: function (param, msg, value) {
-      var namespace = param.split("."),
-        root = namespace.shift(),
-        formParam = root;
-
-      while (namespace.length) {
-        formParam += "[" + namespace.shift() + "]";
-      }
-      return {
-        param: formParam,
-        msg: msg,
-        value: value,
-      };
-    },
-  })
-);
+// app.use(
 
 // app.use(function(req,res,next){
 //     req.db = db;
@@ -133,20 +97,10 @@ app.use((req, res, next) => {
     .findById(req.session.user._id)
     .then((user) => {
       req.user = user;
-      // console.log(req.user);
       next();
     })
     .catch((err) => console.log(err));
 }); // user created
-
-app.use("/", mainRoutes);
-app.use("/posts", postsRoutes);
-app.use("/categories", categoriesRoutes);
-app.use("/login", loginRoutes);
-app.use("/read", readRoutes);
-app.use("/feed", feedRoutes);
-app.use("/search", searchRoutes);
-app.use("/register", registerRoutes);
 
 app.use(helmet());
 app.use(compression());
@@ -188,8 +142,8 @@ mongoose
     // https
     // .createServer({key: privateKey, cert: certificate},app)
     // .listen(process.env.PORT || 3000);
-    app.listen(process.env.PORT || 3000);
+    app.listen(process?.env?.PORT || 8000);
   })
   .catch((err) => {
-    console.log(err);
+    console.log("ERROR", err);
   });
